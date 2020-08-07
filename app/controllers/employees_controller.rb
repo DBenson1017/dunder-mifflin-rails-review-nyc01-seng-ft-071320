@@ -8,7 +8,7 @@ class EmployeesController < ApplicationController
     end 
 
     def new 
-        @employee = Employee.create(employee_params)
+        @employee = Employee.new
     end 
 
     def edit
@@ -17,15 +17,26 @@ class EmployeesController < ApplicationController
 
     def update 
         @employee = Employee.find(params[:id])
-        @employee.update(emloyee_params)
+        @employee.update(employee_params)
         redirect_to employee_path(@employee)
 
     end 
 
+    def create
+        @employee = Employee.new
+        @employee = params[:first_name, :last_name , :alias, :title,:office, :dog_id, :img_url]
+        @employee.save
+        redirect_to employee_path(@employee)
+    end 
+
+    def set_employeemployee
+        @employee = Employee.find(params[:id])
+    end 
+
+    def employee_params
+        params.require(:employee).permit(:first_name, :last_name , :alias, :title,:office, :dog_id, :img_url)
+    end     
+end 
 
 
-
-
-
-
-end
+    
